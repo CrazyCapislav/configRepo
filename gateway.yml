@@ -1,0 +1,84 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/v1/auth/**
+
+        - id: book-service
+          uri: lb://book-service
+          predicates:
+            - Path=/api/v1/books/**,/api/v1/genres/**
+
+        - id: exchange-service
+          uri: lb://exchange-service
+          predicates:
+            - Path=/api/v1/exchanges/**
+
+        - id: publication-service
+          uri: lb://publication-service
+          predicates:
+            - Path=/api/v1/publications/**,/api/v1/publishers/**
+
+        - id: swagger-auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/v3/api-docs/auth
+          filters:
+            - RewritePath=/v3/api-docs/auth, /v3/api-docs
+
+        - id: swagger-book-service
+          uri: lb://book-service
+          predicates:
+            - Path=/v3/api-docs/book
+          filters:
+            - RewritePath=/v3/api-docs/book, /v3/api-docs
+
+        - id: swagger-exchange-service
+          uri: lb://exchange-service
+          predicates:
+            - Path=/v3/api-docs/exchange
+          filters:
+            - RewritePath=/v3/api-docs/exchange, /v3/api-docs
+
+        - id: swagger-publication-service
+          uri: lb://publication-service
+          predicates:
+            - Path=/v3/api-docs/publication
+          filters:
+            - RewritePath=/v3/api-docs/publication, /v3/api-docs
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "${CORS_ALLOWED_ORIGINS:http://localhost:3000}"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+            exposedHeaders:
+              - X-Total-Count
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,gateway
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    dev.petr: DEBUG
+    org.springframework.cloud.gateway: DEBUG
