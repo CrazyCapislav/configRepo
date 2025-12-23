@@ -56,17 +56,25 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "${CORS_ALLOWED_ORIGINS:http://localhost:3000}"
+            # Используем allowedOriginPatterns для более гибкой настройки CORS
+            # Разрешаем все origins для разработки (Swagger UI, разные порты)
+            # В production следует указать конкретные домены
+            allowedOriginPatterns: 
+              - "*"
             allowedMethods:
               - GET
               - POST
               - PUT
               - DELETE
+              - PATCH
               - OPTIONS
-            allowedHeaders: "*"
+            allowedHeaders:
+              - "*"
             allowCredentials: true
             exposedHeaders:
               - X-Total-Count
+              - Content-Type
+              - Authorization
 
 springdoc:
   api-docs:
