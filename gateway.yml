@@ -82,6 +82,9 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     enabled: true
+    # Настройка для использования Gateway URL вместо прямых URL сервисов
+    use-root-path: false
+    config-url: /v3/api-docs/swagger-config
     urls:
       - name: Auth Service
         url: /v3/api-docs/auth
