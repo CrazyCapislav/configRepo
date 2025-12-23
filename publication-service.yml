@@ -34,6 +34,10 @@ resilience4j:
         wait-duration-in-open-state: 10000
         permitted-number-of-calls-in-half-open-state: 3
 
+# Gateway URL для OpenAPI server configuration
+gateway:
+  url: ${GATEWAY_URL:http://localhost:8080}
+
 management:
   endpoints:
     web:

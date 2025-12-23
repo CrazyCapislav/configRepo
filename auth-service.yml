@@ -14,6 +14,10 @@ spring:
     password: ${DB_PASSWORD:bookswap}
     locations: classpath:db/migration
 
+# Gateway URL для OpenAPI server configuration
+gateway:
+  url: ${GATEWAY_URL:http://localhost:8080}
+
 management:
   endpoints:
     web:
