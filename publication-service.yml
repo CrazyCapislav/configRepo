@@ -33,3 +33,12 @@ resilience4j:
         failure-rate-threshold: 50
         wait-duration-in-open-state: 10000
         permitted-number-of-calls-in-half-open-state: 3
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

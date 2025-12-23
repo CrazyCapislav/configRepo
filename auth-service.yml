@@ -13,3 +13,12 @@ spring:
     user: ${DB_USER:bookswap}
     password: ${DB_PASSWORD:bookswap}
     locations: classpath:db/migration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
