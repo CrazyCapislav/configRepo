@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 
 spring:
   cloud:
@@ -54,7 +54,7 @@ spring:
             - RewritePath=/v3/api-docs/publication, /v3/api-docs
 
       globalcors:
-        cors-configurations:
+        corsConfigurations:
           '[/**]':
             allowedOrigins: "${CORS_ALLOWED_ORIGINS:http://localhost:3000}"
             allowedMethods:
@@ -67,6 +67,30 @@ spring:
             allowCredentials: true
             exposedHeaders:
               - X-Total-Count
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    urls:
+      - name: Auth Service
+        url: /v3/api-docs/auth
+      - name: Book Service
+        url: /v3/api-docs/book
+      - name: Exchange Service
+        url: /v3/api-docs/exchange
+      - name: Publication Service
+        url: /v3/api-docs/publication
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
 
 management:
   endpoints:
