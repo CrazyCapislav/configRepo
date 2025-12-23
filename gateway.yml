@@ -31,8 +31,6 @@ spring:
             - Path=/v3/api-docs/auth
           filters:
             - RewritePath=/v3/api-docs/auth, /v3/api-docs
-            # Переписываем server URLs на Gateway URL
-            - ModifyResponseBody=String, String, #rewriteOpenApiServers
 
         - id: swagger-book-service
           uri: lb://book-service
@@ -40,7 +38,6 @@ spring:
             - Path=/v3/api-docs/book
           filters:
             - RewritePath=/v3/api-docs/book, /v3/api-docs
-            - ModifyResponseBody=String, String, #rewriteOpenApiServers
 
         - id: swagger-exchange-service
           uri: lb://exchange-service
@@ -48,7 +45,6 @@ spring:
             - Path=/v3/api-docs/exchange
           filters:
             - RewritePath=/v3/api-docs/exchange, /v3/api-docs
-            - ModifyResponseBody=String, String, #rewriteOpenApiServers
 
         - id: swagger-publication-service
           uri: lb://publication-service
@@ -56,7 +52,6 @@ spring:
             - Path=/v3/api-docs/publication
           filters:
             - RewritePath=/v3/api-docs/publication, /v3/api-docs
-            - ModifyResponseBody=String, String, #rewriteOpenApiServers
 
       globalcors:
         corsConfigurations:
