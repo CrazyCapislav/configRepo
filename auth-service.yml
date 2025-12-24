@@ -21,12 +21,6 @@ gateway:
 springdoc:
   api-docs:
     path: /v3/api-docs
-    groups:
-      enabled: true
-    group-configs:
-      - group: auth
-        display-name: Auth Service API
-        paths-to-match: /api/v1/**
   swagger-ui:
     enabled: false
 
