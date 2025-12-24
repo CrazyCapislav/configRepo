@@ -23,6 +23,17 @@ spring:
 gateway:
   url: ${GATEWAY_URL:http://localhost:8080}
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
+    group-configs:
+      - group: book
+        paths-to-match: /api/v1/**
+  swagger-ui:
+    enabled: false
+
 management:
   endpoints:
     web:
