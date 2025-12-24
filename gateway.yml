@@ -26,25 +26,34 @@ spring:
             - Path=/api/v1/publications/**,/api/v1/publishers/**
 
         # Маршруты для Swagger API docs (проксирование к сервисам)
+        # SpringDoc с группами возвращает спецификацию по пути /v3/api-docs/{group}
         - id: swagger-auth-service
           uri: lb://auth-service
           predicates:
             - Path=/v3/api-docs/auth
+          filters:
+            - StripPrefix=0
 
         - id: swagger-book-service
           uri: lb://book-service
           predicates:
             - Path=/v3/api-docs/book
+          filters:
+            - StripPrefix=0
 
         - id: swagger-exchange-service
           uri: lb://exchange-service
           predicates:
             - Path=/v3/api-docs/exchange
+          filters:
+            - StripPrefix=0
 
         - id: swagger-publication-service
           uri: lb://publication-service
           predicates:
             - Path=/v3/api-docs/publication
+          filters:
+            - StripPrefix=0
 
       globalcors:
         corsConfigurations:
