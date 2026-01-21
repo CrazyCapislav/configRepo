@@ -9,21 +9,29 @@ spring:
           uri: lb://auth-service
           predicates:
             - Path=/api/v1/auth/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: book-service
           uri: lb://book-service
           predicates:
             - Path=/api/v1/books/**,/api/v1/genres/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: exchange-service
           uri: lb://exchange-service
           predicates:
             - Path=/api/v1/exchanges/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: publication-service
           uri: lb://publication-service
           predicates:
             - Path=/api/v1/publications/**,/api/v1/publishers/**
+          filters:
+            - JwtAuthenticationFilter
 
         # Маршруты для Swagger API docs (проксирование к сервисам)
         # Каждый сервис возвращает спецификацию по стандартному пути /v3/api-docs
